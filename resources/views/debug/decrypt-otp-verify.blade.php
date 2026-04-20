@@ -20,7 +20,7 @@
             
             <div class="text-center mb-8">
                 <p class="text-gray-600 mb-2">We sent a 6-digit code to your admin email.</p>
-                <p class="text-sm text-gray-500">Time remaining: <span id="timer">300s</span></p>
+                <p class="text-sm text-gray-500">Code expires in: <span id="timer" class="font-semibold text-red-600">10s</span></p>
             </div>
             
             @if (session('error'))
@@ -69,8 +69,14 @@
             </form>
             
             <div class="mt-6 text-center">
+                <form method="POST" action="{{ route('debug.decrypt.otp.resend') }}" class="inline">
+                    @csrf
+                    <button type="submit" id="resendBtn" class="text-sm text-blue-600 hover:underline">
+                        Resend Code
+                    </button>
+                </form>
                 <p class="text-xs text-gray-500 mt-2">
-                    Didn't receive the code? Check spam folder or try again.
+                    Didn't receive the code? Check spam folder or resend above.
                 </p>
                 <p class="mt-4">
                     <a href="/admin/dashboard" class="text-sm text-gray-600 hover:underline">Back to Dashboard</a>
@@ -85,8 +91,9 @@
 </main>
 
 <script>
-    let timeLeft = 300; // 5 minutes
+    let timeLeft = 10; // 10 seconds
     const timerEl = document.getElementById('timer');
+    const resendBtn = document.getElementById('resendBtn');
     
     const interval = setInterval(() => {
         timeLeft--;
@@ -95,7 +102,8 @@
         } else {
             clearInterval(interval);
             if (timerEl) {
-                timerEl.innerHTML = '<span class="text-red-500">Expired - Go back and request new OTP</span>';
+                timerEl.innerHTML = '<span class="text-red-600">Expired</span>';
+                document.querySelector('button[type="submit"]').disabled = true;
             }
         }
     }, 1000);

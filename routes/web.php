@@ -215,6 +215,7 @@ Route::middleware('auth')->group(function () {
     // Requires OTP verification for security.
     Route::get('/debug/decrypt', [DebugController::class, 'showDecryptForm'])->name('debug.decrypt.form');
     Route::post('/debug/decrypt/otp', [DebugController::class, 'issueDecryptOtp'])->name('debug.decrypt.otp');
+    Route::post('/debug/decrypt/otp/resend', [DebugController::class, 'resendDecryptOtp'])->name('debug.decrypt.otp.resend');
     Route::post('/debug/decrypt/otp-verify', [DebugController::class, 'verifyDecryptOtp'])->name('debug.decrypt.otp.verify');
     Route::post('/debug/decrypt', [DebugController::class, 'decrypt'])->name('debug.decrypt');
 

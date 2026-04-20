@@ -37,17 +37,44 @@ class DebugController extends Controller
         $user = auth()->user();
         $otp = rand(100000, 999999);
 
-        // Store OTP in session with 5-minute expiry
+        // Store OTP in session with 10-second expiry
         session([
             'decrypt_otp' => $otp,
-            'decrypt_otp_expires_at' => now()->addMinutes(5),
+            'decrypt_otp_expires_at' => now()->addSeconds(10),
             'decrypt_otp_attempts' => 0,
         ]);
 
-        // In production, send OTP via email/SMS. For now, log it.
-        \Log::info("Decrypt utility OTP issued: {$otp}");
+        // Log OTP to otp.log file for reference
+        $logMessage = "[" . now()->format('Y-m-d H:i:s') . "] Admin '{$user->email}' requested decrypt OTP: {$otp} (expires in 10 seconds)\n";
+        file_put_contents(storage_path('logs/otp.log'), $logMessage, FILE_APPEND);
 
-        return view('debug.decrypt-otp-verify', ['otp_issued' => true]);
+        return view('debug.decrypt-otp-verify', ['otp_issued' => true, 'timeLeft' => 10]);
+    }
+
+    /**
+     * Resend OTP code for decrypt utility access.
+     */
+    public function resendDecryptOtp(Request $request)
+    {
+        if (! auth()->check() || ! auth()->user()->isAdmin()) {
+            return redirect()->route('home');
+        }
+
+        $user = auth()->user();
+        $otp = rand(100000, 999999);
+
+        // Store new OTP in session with 10-second expiry
+        session([
+            'decrypt_otp' => $otp,
+            'decrypt_otp_expires_at' => now()->addSeconds(10),
+            'decrypt_otp_attempts' => 0,
+        ]);
+
+        // Log resent OTP to otp.log file
+        $logMessage = "[" . now()->format('Y-m-d H:i:s') . "] Admin '{$user->email}' resent decrypt OTP: {$otp} (expires in 10 seconds)\n";
+        file_put_contents(storage_path('logs/otp.log'), $logMessage, FILE_APPEND);
+
+        return view('debug.decrypt-otp-verify', ['otp_issued' => true, 'timeLeft' => 10]);
     }
 
     /**
