@@ -13,6 +13,7 @@
                     <p class="mt-2 text-gray-600">Approve or reject reservations, manage members, and review audit activity.</p>
                 </div>
                 <a href="/reserve" class="inline-flex items-center px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">Back to User Portal</a>
+                <a href="{{ route('debug.decrypt.form') }}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors">🔐 Decrypt Utility</a>
             </div>
         </div>
 

@@ -10,6 +10,7 @@ Route::middleware('auth')->get('/calendar/manage', function () {
     return view('calendar-manage');
 });
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\DebugController;
 // API endpoint for facility dropdown
 Route::get('/api/facilities', [FacilityController::class, 'list']);
 
@@ -209,6 +210,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/mark-read', [NotificationController::class, 'markAllRead'])->name('notifications.markRead');
     Route::post('/notifications/delete-selected', [NotificationController::class, 'destroySelected'])->name('notifications.destroySelected');
+
+    // Debug utility: simple developer decrypt page for Laravel encrypted strings.
+    // Requires OTP verification for security.
+    Route::get('/debug/decrypt', [DebugController::class, 'showDecryptForm'])->name('debug.decrypt.form');
+    Route::post('/debug/decrypt/otp', [DebugController::class, 'issueDecryptOtp'])->name('debug.decrypt.otp');
+    Route::post('/debug/decrypt/otp-verify', [DebugController::class, 'verifyDecryptOtp'])->name('debug.decrypt.otp.verify');
+    Route::post('/debug/decrypt', [DebugController::class, 'decrypt'])->name('debug.decrypt');
 
     // Admin portal routes (hidden / secret access only)
     Route::prefix('admin')->group(function () {

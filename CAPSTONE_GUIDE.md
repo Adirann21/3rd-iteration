@@ -282,6 +282,12 @@ This is the bridge between backend reservations and frontend calendar rendering.
 - `app/Http/Controllers/NotificationController.php`
 - `resources/views/notifications/index.blade.php`
 
+### Debug utilities
+- `app/Http/Controllers/DebugController.php`
+  - Provides a simple web form to decrypt Laravel encrypted strings using the app's current `APP_KEY`
+- `resources/views/debug/decrypt.blade.php`
+  - Web interface for pasting and decrypting `Crypt::encryptString()` values
+
 ### Data security
 - `app/Models/SavedCredential.php`
 - `app/Models/User.php`
