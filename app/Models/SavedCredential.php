@@ -107,6 +107,7 @@ class SavedCredential extends Model
      */
     public function setPasswordAttribute($value)
     {
+        // Encrypt saved passwords in the database to protect them when stored.
         $this->attributes['password'] = Crypt::encryptString($value);
     }
 

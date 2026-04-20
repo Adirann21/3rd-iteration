@@ -50,12 +50,9 @@
             </div>
         </div>
 
-        <div class="flex justify-center gap-4">
+        <div class="flex justify-center">
             <a href="/reserve" class="px-6 py-2 rounded-md border border-gray-900 text-gray-900 hover:bg-gray-100 transition-colors">
                 Reserve Now
-            </a>
-            <a href="/contact" class="px-6 py-2 rounded-md border border-gray-900 text-gray-900 hover:bg-gray-100 transition-colors">
-                Inquire Now
             </a>
         </div>
     </div>

@@ -3,6 +3,7 @@
 @section('title', 'Add Credential - Campus Reserve')
 
 @section('content')
+<!-- Create credential form: user can submit site login details to be encrypted and stored. -->
 <div class="min-h-screen bg-gray-50">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <!-- Header -->

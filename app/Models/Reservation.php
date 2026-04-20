@@ -68,6 +68,7 @@ class Reservation extends Model
      */
     public function scopeUpcoming($query)
     {
+        // Query only reservations that are still active and not in the past.
         return $query->where('reservation_date', '>=', now()->toDateString())
             ->whereIn('status', ['pending', 'approved'])
             ->orderBy('reservation_date')
@@ -90,6 +91,8 @@ class Reservation extends Model
      */
     public function canBeCancelled(): bool
     {
+        // A reservation can only be cancelled if it is pending or approved
+        // and its date is today or in the future.
         return in_array($this->status, ['pending', 'approved']) 
             && $this->reservation_date >= now()->toDateString();
     }

@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         // Only seed dummy reservations (assumes users/facilities already exist)
+$this->call(UserSeeder::class);
+        $this->call(FacilitySeeder::class);
         $this->call(DummyReservationSeeder::class);
     }
 }

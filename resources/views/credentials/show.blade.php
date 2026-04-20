@@ -3,6 +3,7 @@
 @section('title', $credential->site_name . ' - Campus Reserve')
 
 @section('content')
+<!-- View credential details page. Password display and clipboard actions are handled with JavaScript. -->
 <div class="min-h-screen bg-gray-50">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <!-- Header -->
@@ -121,7 +122,6 @@ async function fetchPassword() {
         cachedPassword = data.password;
         return cachedPassword;
     } catch (error) {
-        console.error('Error fetching password:', error);
         return null;
     }
 }

@@ -1,3 +1,7 @@
+/*
+    Primary Tailwind CSS entrypoint for the Laravel frontend.
+    This file is compiled by Vite into the application stylesheet.
+*/
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

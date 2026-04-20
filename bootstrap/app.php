@@ -11,8 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Apply security headers to all HTTP responses globally
+        $middleware->use([\App\Http\Middleware\SecurityHeaders::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // Render exceptions securely - no debug details in production
+        $exceptions->shouldRenderJsonWhen(function ($request) {
+            return $request->expectsJson();
+        });
     })->create();

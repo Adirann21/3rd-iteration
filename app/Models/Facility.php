@@ -70,6 +70,8 @@ class Facility extends Model
      */
     public function isAvailable($date, $startTime, $endTime, $excludeReservationId = null): bool
     {
+        // Check for overlapping pending or approved reservations for this facility.
+        // Reservations conflict if times overlap or one contains the other.
         $query = $this->reservations()
             ->where('reservation_date', $date)
             ->whereIn('status', ['pending', 'approved'])

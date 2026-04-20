@@ -7,17 +7,17 @@
     </a>
 
     <nav class="hidden md:flex items-center gap-8">
-        <a href="/" class="text-sm font-medium hover:text-gray-600 transition-colors {{ request()->is('/') ? 'text-black' : 'text-gray-700' }}">HOME</a>
-        <a href="/reserve" class="text-sm font-medium hover:text-gray-600 transition-colors {{ request()->is('reserve') ? 'text-black' : 'text-gray-700' }}">RESERVE</a>
-        <a href="/calendar" class="text-sm font-medium hover:text-gray-600 transition-colors {{ request()->is('calendar') ? 'text-black' : 'text-gray-700' }}">CALENDAR</a>
-        <a href="/about" class="text-sm font-medium hover:text-gray-600 transition-colors {{ request()->is('about') ? 'text-black' : 'text-gray-700' }}">ABOUT US</a>
-        <a href="/contact" class="text-sm font-medium hover:text-gray-600 transition-colors {{ request()->is('contact') ? 'text-black' : 'text-gray-700' }}">CONTACT</a>
+        <a href="/" class="text-sm font-medium text-black hover:text-slate-700 transition-colors">HOME</a>
+        <a href="/reserve" class="text-sm font-medium text-black hover:text-slate-700 transition-colors">RESERVE</a>
+        <a href="/calendar" class="text-sm font-medium text-black hover:text-slate-700 transition-colors">CALENDAR</a>
+        <a href="/about" class="text-sm font-medium text-black hover:text-slate-700 transition-colors">ABOUT US</a>
+        <a href="/contact" class="text-sm font-medium text-black hover:text-slate-700 transition-colors">CONTACT</a>
     </nav>
 
     <div class="flex items-center gap-3">
         @auth
-            <a href="/reserve" class="text-sm font-medium text-gray-700 hover:text-gray-900">Dashboard</a>
-            <a href="{{ route('credentials.index') }}" class="text-sm font-medium text-gray-700 hover:text-gray-900">Passwords</a>
+            <a href="/reserve" class="text-sm font-medium text-black hover:text-slate-700">Dashboard</a>
+            <a href="{{ route('credentials.index') }}" class="text-sm font-medium text-black hover:text-slate-700">Passwords</a>
             <form method="POST" action="{{ route('logout') }}" class="inline">
                 @csrf
                 <button type="submit" class="px-4 py-1.5 text-sm font-medium bg-black text-white rounded-full hover:bg-gray-800 transition-colors">
